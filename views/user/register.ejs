@@ -48,19 +48,20 @@
   <script>
     $(function () {
       $('#form').on('submit', function (e) {
+        // console.log('ok')
         // 取消表单的默认提交事件
         e.preventDefault()
         // 当取消了表单的默认提交行为之后，手动发起Ajax请求，提交表单
         $.ajax({
-          url: '/register',
-          data: $('#form').serialize(),
-          type: 'POST',
-          dataType: 'json',
-          success: function (result) {
-            if (result.status !== 200) {
-              return alert(result.msg)
-            }
-            location.href = '/login'
+          url:'/register',
+          type:'post',
+          data:$('#form').serialize(),
+          dataType:'json',
+          success:function(result){
+              if(result.status!==200){
+                return alert(result.msg)
+              }
+              location.href='/login'
           }
         })
       })
