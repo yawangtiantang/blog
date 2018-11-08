@@ -3,8 +3,17 @@ const app = express()
 const bodyParser =require('body-parser')
 const fs =require('fs')
 const path=require('path')
+// 导入session中间件
+const session = require('express-session')
 app.set('view engine','ejs')
 app.set('views','./views')
+// 注册session中间件
+app.use(session({
+  secret:'这是一个加密的密钥',
+  resave:false,
+  saveUninitialized:false
+
+}))
 // 注册解析表单数据的中间件
 app.use(bodyParser.urlencoded({extended:false}))
 app.use('/node_modules',express.static('./node_modules'))

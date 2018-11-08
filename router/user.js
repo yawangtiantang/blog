@@ -12,4 +12,7 @@ router.post('/register',controller.handleRegisterPost);
 // 监听登录请求
 router.post('/login',controller.handleLoginPost)
 
+// 监听注销请求
+router.get('/logout', controller.handleLogoutGet);
+
 module.exports = router

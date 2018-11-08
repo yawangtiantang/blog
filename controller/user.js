@@ -70,11 +70,25 @@ module.exports = {
         status: 502,
         msg: '用户登录失败'
       })
+      // console.log(req.session)
+      // console.log(result)
+     // 登录成功后存储用户信息到session中
+     req.session.user = result[0]
+     // 存储登录状态
+     
+     req.session.isLogin = true
       res.send({
         status: 200,
         msg: '登录成功'
       })
     })
 
+  },
+  handleLogoutGet(req, res) {
+    req.session.destroy(err => { 
+      
+      res.redirect('/') 
+    })
   }
+  
 }
