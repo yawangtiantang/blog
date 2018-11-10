@@ -75,8 +75,10 @@ module.exports = {
      // 登录成功后存储用户信息到session中
      req.session.user = result[0]
      // 存储登录状态
-     
      req.session.isLogin = true
+    //  设置cookie的有效期
+    let hour = 1000*60*60*24*30
+    req.session.cookie.expires=new Date(Date.now()+hour)
       res.send({
         status: 200,
         msg: '登录成功'
