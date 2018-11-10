@@ -1,8 +1,10 @@
 <%- include('../common/header.ejs')%>
 <div class='container'>
   <h1><%=article.title%>
-  <a href="#" class='btn btn-info pull-right'>编辑</a>
-  
+    <!-- 判断只有登录了并且登录人的id和文章作者本人的id相同的时候才展示编辑按钮 -->
+  <% if(isLogin && user.id==article.authorId){%>
+    <a href="#" class='btn btn-info pull-right'>编辑</a>
+  <%}%>
   </h1>
   <hr>
   <div><%=article.content %></div>
