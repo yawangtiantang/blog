@@ -2,12 +2,12 @@
 <div class='container'>
   <h1><%=article.title%>
     <!-- 判断只有登录了并且登录人的id和文章作者本人的id相同的时候才展示编辑按钮 -->
-  <% if(isLogin && user.id==article.authorId){%>
-    <a href="#" class='btn btn-info pull-right'>编辑</a>
-  <%}%>
+    <% if(isLogin && user.id === article.authorId){ %>
+      <a href="/article/edit/<%= article.id %>" class="btn btn-info pull-right">编辑</a>
+    <% } %>
   </h1>
   <hr>
-  <div><%=article.content %></div>
+  <div><%-article.content %></div>
 </div>
   
 <%- include('../common/footer.ejs')%>   

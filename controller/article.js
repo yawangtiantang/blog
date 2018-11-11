@@ -43,6 +43,26 @@ module.exports = {
     // 渲染详情页面
     res.render('./article/info.ejs', { user: req.session.user, isLogin: req.session.isLogin, article: result[0] })
   })
+},
+handleArticleEditGet (req,res) {
+     // 如果用户没有登录，则不允许查看文章编辑页面
+  if (!req.session.isLogin) return res.redirect('/')
+  const sql = 'select * from articles where id=?'
+  conn.query(sql, req.params.id, (err, result) => {
+    if (err) return res.redirect('/')
+    if (result.length !== 1) return res.redirect('/')
+    // 渲染详情页
+    res.render('./article/edit.ejs', { user: req.session.user, isLogin: req.session.isLogin, article: result[0] })
+  })
+},
+handleArticleEditPost (req,res) {
+    const sql = 'update articles set ? where id=?'
+    conn.query(sql,[req.body,req.body.id],(err,result)=>{
+        if(err) return res.send({status:501,msg:'err.message'})
+        // console.log(result)
+        if(result.affectedRows!==1) res.send({status:502,msg:'编辑文章失败'})
+        res.send({status:200,msg:'ok'})
+    })
 }
 }
 
