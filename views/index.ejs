@@ -12,19 +12,19 @@
   </div>
 <!-- 分页区域 -->
 <ul class="pagination list-group">
-  <li>
-    <a href="#" aria-label="previous">
+  <li class="<%= nowPage-1 ===0 ? 'disabled' : "" %>">
+    <<%= nowPage-1 ===0 ? 'span' : 'a' %> href="?page=<%=nowPage - 1 < 1 ? 1 : nowPage - 1%>" aria-label="previous">
         <span aria-hidden="true">&laquo;</span>
-    </a>
+    </<%= nowPage-1 ===0 ? 'span' : 'a' %>>
     
   </li>
-  <% for(var i =1; i<totalPage;i++){%>
-   <li class="<%= nowPage === i ? 'active' : "" %>"><a href="#"><%=i%></a></li>
+  <% for(var i =0; i<totalPage;i++){%>
+   <li class="<%= nowPage === i+1 ? 'active' : "" %>"><a href="?page=<%=i+1%>"><%=i+1 %></a></li>
   <%}%>
-   <li>
-      <a href="#" aria-label="previous">
+   <li class="<%= nowPage+1 >totalPage ? 'disabled' : "" %>">
+      <<%= nowPage+1 >totalPage ? 'span' : 'a' %> href="?page=<%=nowPage +1 > totalPage ? totalPage : nowPage+1%>" aria-label="previous">
           <span aria-hidden="true">&laquo;</span>
-      </a>
+      </<%= nowPage+1 >totalPage ? 'span' : 'a' %>>
       
    </li>
 </ul>

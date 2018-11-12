@@ -5,11 +5,13 @@ module.exports = {
   //展示首页
   handleIndexGet(req, res) {
     const pageSize = 3
-   let nowPage = req.query.page || 1
-    const sql =`select articles.title,articles.ctime,articles.id,users.nickname from articles LEFT JOIN users ON articles.authorId=users.id order by articles.id desc;select count(*) as count from articles`
+  //  let nowPage = req.query.page || 1
+  // console.log(req.query.page)
+  let nowPage =parseInt(req.query.page) || 1
+    const sql =`select articles.title,articles.ctime,articles.id,users.nickname from articles LEFT JOIN users ON articles.authorId=users.id order by articles.id desc limit ${(nowPage-1)*3} ,${pageSize};select count(*) as count from articles`
 
     conn.query(sql,(err,result) =>{
-      console.log(result)
+      // console.log(result)
       if(err) return res.render('index.ejs',{ user:req.session.user,
         isLogin:req.session.isLogin,articles:[]})
         // 总页数
